@@ -6,6 +6,7 @@ using Unity.Netcode;
 
 public class CharacterMover : NetworkBehaviour
 {
+    public GameObject spawnObject;
     public float speed;
     float horizontal;
     float vertical;
@@ -14,7 +15,7 @@ public class CharacterMover : NetworkBehaviour
         if (!IsOwner)
         {
             this.enabled = false;
-            Destroy(GetComponent<Rigidbody>());
+            //Destroy(GetComponent<Rigidbody>());
         }
     }
     void Update()
@@ -23,5 +24,17 @@ public class CharacterMover : NetworkBehaviour
         float vertical = Input.GetAxis("Vertical");
         Vector3 dir = new Vector3(horizontal * Time.deltaTime * speed, 0, vertical * Time.deltaTime * speed);
         transform.position += dir;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            SpawnObjectServerRPC();
+        }
+    }
+
+    [ServerRpc]
+    void SpawnObjectServerRPC()
+    {
+        GameObject go = Instantiate(spawnObject, transform.position, transform.rotation);
+        go.GetComponent<NetworkObject>().Spawn();
     }
 }
