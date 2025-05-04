@@ -17,6 +17,7 @@ public class RelayManager : MonoBehaviour
     public InputField codeText;
     public Button joinButton;
     public InputField joinInput;
+    public static List<CharacterMover> players = new List<CharacterMover>();
 
     async void Start()
     {
@@ -69,4 +70,6 @@ public class RelayManager : MonoBehaviour
         //Join the room as a guest player
         NetworkManager.Singleton.StartClient();
     }
+
+
 }
