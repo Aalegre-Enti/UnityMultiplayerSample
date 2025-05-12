@@ -8,7 +8,7 @@ namespace Unity.Multiplayer.Samples.Utilities.ClientAuthority
     /// for transforms that'll always be owned by the server.
     /// </summary>
     [DisallowMultipleComponent]
-    public class ClientNetworkAnimator : NetworkTransform
+    public class ClientNetworkAnimator : NetworkAnimator
     {
         /// <summary>
         /// Used to determine who can write to this transform. Owner client only.
